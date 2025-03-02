@@ -32,7 +32,7 @@ function RegisterForm(): React.ReactElement {
     visible: false,
     time: 120
   });
-  const timer = useRef<NodeJS.Timeout>();
+  const timer = useRef<NodeJS.Timeout | undefined>(undefined);
 
   const handleTimeText = (): void => {
     timer.current && clearInterval(timer.current);
@@ -144,7 +144,7 @@ function RegisterForm(): React.ReactElement {
   };
 
   return (
-    <>
+    <View style={styles.registerForm}>
       <Text style={styles.title}>注册</Text>
       <View style={styles.form}>
         <View style={styles.formItem}>
@@ -189,11 +189,15 @@ function RegisterForm(): React.ReactElement {
         onComplete={handleCaptchaComplete}
         onCancel={handleCaptchaCancel}
       />
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  registerForm: {
+    marginTop: 42,
+    marginHorizontal: 38
+  },
   title: {
     fontWeight: '700',
     fontSize: 22,

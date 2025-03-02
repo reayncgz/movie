@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, Image, Pressable } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { StatusBar, View, Text, Image, Pressable } from 'react-native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { timeStampToDuration } from '@/utils/utils';
 import { videosList } from '@/api/videos';
 import type { ListRenderItemInfo } from 'react-native';
@@ -24,6 +24,11 @@ type ItemType = {
 
 function Videos(): React.ReactElement {
   const navigation: Navigation = useNavigation();
+
+  // 状态栏
+  useFocusEffect(() => {
+    StatusBar.setBarStyle('dark-content');
+  });
 
   const renderItem = ({ item }: ListRenderItemInfo<ItemType>) => (
     <Pressable onPress={() => navigation.push('VideoDetail', { id: item.id })}>
@@ -70,6 +75,7 @@ function Videos(): React.ReactElement {
         params={{ page: 1, pageSize: 5 }}
         request={videosList}
         renderItem={renderItem}
+        style={styles.list}
       />
     </View>
   );

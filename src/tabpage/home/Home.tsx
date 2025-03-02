@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, StyleSheet, Animated } from 'react-native';
+import { ScrollView, StyleSheet, Animated } from 'react-native';
 import LinearGradinet from 'react-native-linear-gradient';
 import { colorToRgba } from '@/utils/utils';
 import { indexData } from '@/api/home';
@@ -91,17 +91,7 @@ function Home(): React.ReactElement {
   const spinValue = new Animated.Value(0);
   const spinBackgroundColor = spinValue.interpolate({
     inputRange: [0, 150],
-    outputRange: ['transparent', '#ffffff'],
-    extrapolate: 'clamp'
-  });
-  const spinWidth = spinValue.interpolate({
-    inputRange: [0, 150],
-    outputRange: [0, 0.38],
-    extrapolate: 'clamp'
-  });
-  const spinColor = spinValue.interpolate({
-    inputRange: [0, 150],
-    outputRange: ['transparent', '#dfdfdf'],
+    outputRange: ['transparent', '#e54847'],
     extrapolate: 'clamp'
   });
 
@@ -128,17 +118,9 @@ function Home(): React.ReactElement {
       showsVerticalScrollIndicator={false}
       style={styles.page}
     >
-      <View>
-        <Animated.View
-          style={{
-            backgroundColor: spinBackgroundColor,
-            borderBottomWidth: spinWidth,
-            borderColor: spinColor
-          }}
-        >
-          <Search />
-        </Animated.View>
-      </View>
+      <Animated.View style={{ backgroundColor: spinBackgroundColor }}>
+        <Search />
+      </Animated.View>
       <LinearGradinet colors={gradientColor} style={styles.bgcolor} />
       <Banner list={banner} onChange={bannerChange} />
       <Category />

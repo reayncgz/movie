@@ -1,10 +1,22 @@
 import React from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {
+  StatusBar,
+  Platform,
+  View,
+  Text,
+  Pressable,
+  StyleSheet
+} from 'react-native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import type { Navigation } from '@/types/index';
 
 function Search(): React.ReactElement {
   const navigation: Navigation = useNavigation();
+
+  // 状态栏
+  useFocusEffect(() => {
+    StatusBar.setBarStyle('light-content');
+  });
 
   return (
     <View style={styles.search}>
@@ -19,8 +31,9 @@ function Search(): React.ReactElement {
 const styles = StyleSheet.create({
   search: {
     width: '100%',
-    height: 48,
-    padding: 10
+    height: 48 ,
+    padding: 10,
+    marginTop: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight
   },
   input: {
     display: 'flex',

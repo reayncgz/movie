@@ -75,7 +75,7 @@ function LoginForm(): React.ReactElement {
   };
 
   return (
-    <>
+    <View style={styles.loginForm}>
       <Text style={styles.title}>登录</Text>
       <View style={styles.form}>
         <View style={styles.formItem}>
@@ -109,11 +109,15 @@ function LoginForm(): React.ReactElement {
           <Text style={styles.submitText}>登 录</Text>
         </Pressable>
       </View>
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  loginForm: {
+    marginTop: 42,
+    marginHorizontal: 38
+  },
   title: {
     fontWeight: '700',
     fontSize: 22,

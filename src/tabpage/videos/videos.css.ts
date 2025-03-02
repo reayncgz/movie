@@ -1,10 +1,16 @@
-import { StyleSheet } from 'react-native';
+import { StatusBar, Platform, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   page: {
-    flex: 1,
-    paddingTop: 14,
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    height: '100%',
+    paddingTop: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight,
     backgroundColor: '#ffffff'
+  },
+  list: {
+    marginTop: 14
   },
   item: {
     marginHorizontal: 10

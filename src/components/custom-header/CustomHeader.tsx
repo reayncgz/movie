@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, Pressable } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { StatusBar, View, Text, Pressable } from 'react-native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import type { ViewStyle } from 'react-native';
 import type { StackNavigationOptions } from '@react-navigation/stack';
 import type { Navigation } from '@/types/index';
@@ -16,6 +16,11 @@ type Props = {
 
 function CustomHeader(props: Props): React.ReactElement {
   const navigation: Navigation = useNavigation();
+
+  // 状态栏
+  useFocusEffect(() => {
+    StatusBar.setBarStyle('light-content');
+  });
 
   return (
     <View style={[styles.header, props.headerStyle]}>

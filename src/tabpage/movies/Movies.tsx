@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
+  StatusBar,
+  Platform,
   View,
   Text,
   Image,
@@ -7,7 +9,7 @@ import {
   StyleSheet,
   Dimensions
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { moviesList } from '@/api/movies';
 import type { ListRenderItemInfo } from 'react-native';
 import type { Navigation } from '@/types/index';
@@ -32,7 +34,7 @@ function Movies(): React.ReactElement {
     year: '全部'
   });
 
-  const timer = useRef<NodeJS.Timeout>();
+  const timer = useRef<NodeJS.Timeout | undefined>(undefined);
 
   const handleNavChange = (categoryParams: typeof params): void => {
     timer.current && clearTimeout(timer.current);
@@ -45,6 +47,11 @@ function Movies(): React.ReactElement {
   useEffect(() => {
     return () => timer.current && clearTimeout(timer.current);
   }, []);
+
+  // 状态栏
+  useFocusEffect(() => {
+    StatusBar.setBarStyle('dark-content');
+  });
 
   const renderItem = ({ item }: ListRenderItemInfo<ItemType>) => (
     <Pressable onPress={() => navigation.push('MovieDetail', { id: item.id })}>
@@ -102,6 +109,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     width: '100%',
     height: '100%',
+    paddingTop: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight,
     backgroundColor: '#ffffff'
   },
   list: {

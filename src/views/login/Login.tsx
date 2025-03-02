@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {
+  StatusBar,
+  Platform,
+  View, Text,
+  Pressable,
+  StyleSheet
+} from 'react-native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import type { Navigation } from '@/types/index';
 import LoginForm from './login-form/LoginForm';
 import RegisterForm from './register-form/RegisterForm';
@@ -22,6 +28,11 @@ function Login(): React.ReactElement {
 
     setFormType('login');
   };
+
+  // 状态栏
+  useFocusEffect(() => {
+    StatusBar.setBarStyle('dark-content');
+  });
 
   return (
     <View style={styles.page}>
@@ -46,17 +57,12 @@ function Login(): React.ReactElement {
 
 const styles = StyleSheet.create({
   page: {
-    position: 'relative',
     width: '100%',
     height: '100%',
-    paddingTop: 84,
-    paddingHorizontal: 38,
+    paddingTop: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight,
     backgroundColor: '#ffffff'
   },
   close: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -73,7 +79,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 22
+    marginTop: 22,
+    marginHorizontal: 38
   },
   toolText: {
     fontSize: 12,

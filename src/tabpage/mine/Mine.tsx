@@ -1,6 +1,14 @@
 import React from 'react';
-import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
+import {
+  StatusBar,
+  View,
+  Text,
+  Image,
+  Pressable,
+  StyleSheet
+} from 'react-native';
 import { useSelector } from 'react-redux';
+import { useFocusEffect } from '@react-navigation/native';
 import type { RootState } from '@/store/index';
 import type { Navigation } from '@/types/index';
 import MineCount from './mine-count/MineCount';
@@ -11,6 +19,11 @@ type Props = {
 
 function Mine(props: Props): React.ReactElement {
   const userinfo = useSelector((state: RootState) => state.routine.userinfo);
+
+  // 状态栏
+  useFocusEffect(() => {
+    StatusBar.setBarStyle('light-content');
+  });
 
   return (
     <View style={styles.page}>
@@ -117,7 +130,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 16,
     width: '100%',
-    height: 198,
+    height: 228,
     paddingHorizontal: 14,
     backgroundColor: '#e54847'
   },

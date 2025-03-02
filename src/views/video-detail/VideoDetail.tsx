@@ -146,8 +146,8 @@ function VideoDetail(): React.ReactElement {
         return (
           <CustomHeader
             options={options}
-            headerStyle={{ height: 0 }}
-            arrowStyle={{ position: 'absolute', top: 0 }}
+            headerStyle={{ height: 0, backgroundColor: 'black' }}
+            arrowStyle={{ position: 'absolute', top: 25 }}
           />
         );
       }

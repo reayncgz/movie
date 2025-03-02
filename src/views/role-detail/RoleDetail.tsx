@@ -62,8 +62,12 @@ function RoleDetail(): React.ReactElement {
         return (
           <CustomHeader
             options={options}
-            headerStyle={{ height: 0 }}
-            arrowStyle={{ position: 'absolute', top: 0 }}
+            headerStyle={{
+              height: 0,
+              paddingTop: 0,
+              backgroundColor: 'transparent'
+            }}
+            arrowStyle={{ position: 'absolute', top: 25 }}
           />
         );
       }
